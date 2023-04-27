@@ -107,7 +107,6 @@ router.post('/login', isLoggedOut, (req, res, next) => {
 
   console.log('SESSION =====> ', req.session);
  
-
   if (!username) {
     return res.status(400).render('auth/login', { errorMessage: 'Please provide your username.' })
   }
@@ -123,7 +122,7 @@ router.post('/login', isLoggedOut, (req, res, next) => {
   }
 
   // Search the database for a user with the email submitted in the form
-  User.findOne({ email })
+  User.findOne({ username })
     .then(user => {
       // If the user isn't found, send an error message that user provided wrong credentials
       if (!user) {
@@ -140,7 +139,7 @@ router.post('/login', isLoggedOut, (req, res, next) => {
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
 
         /********************* SHOULD WE redirect to /profile here???? ***************/
-        return res.redirect('/')
+        return res.redirect('profile')
       })
     })
 
@@ -150,6 +149,11 @@ router.post('/login', isLoggedOut, (req, res, next) => {
       next(err)
       // return res.status(500).render("auth/login", { errorMessage: err.message });
     })
+})
+
+// GET /auth/profile
+router.get('/profile', isLoggedIn, (req, res) => {
+  res.render('auth/profile', { user: req.session.user })
 })
 
 // GET /auth/logout
@@ -163,5 +167,17 @@ router.get('/logout', isLoggedIn, (req, res) => {
     res.redirect('/')
   })
 })
+
+//POST auth/logout
+router.post('/logout', isLoggedIn, (req, res) => {
+  req.session.destroy(err => {
+    if (err) {
+      res.status(500).render('auth/logout', { errorMessage: err.message })
+      return
+    }
+
+    res.redirect('/')
+  })
+}) 
 
 module.exports = router
