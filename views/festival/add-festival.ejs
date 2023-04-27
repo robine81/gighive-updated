@@ -1,0 +1,37 @@
+<h1>ADD NEW FESTIVAL</h1>
+
+<form action="/auth/login" method="POST">
+    <label>
+      Name of Festival (*)
+      <input type="text" name="name" />
+    </label>
+    <label>
+        Name of Venue (*)
+        <input type="text" name="venue" />
+      </label>
+      <label>
+       Info
+        <input type="text" name="textInfo" />
+      </label>
+      <label>
+        Genre (*)
+        <input type="text" name="genre" />
+      </label>
+      <label>
+        Date (*)
+        <input type="text" name="date" />
+      </label>
+      <label>
+        Artwork
+        <input type="text" name="image" />
+      </label>
+      <label>
+        Email (*)
+        <input type="text" name="email" />
+      </label>
+  
+    <button type="submit">Add new festival</button>
+  </form>
+  
+  <% if (typeof errorMessage !== 'undefined') { %> <%= errorMessage %> <% } %>
+  

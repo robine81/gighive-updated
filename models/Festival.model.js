@@ -18,6 +18,7 @@ const festivalSchema = new Schema({
   },
   date: {
     type: Date,
+    required: true,
     default: Date.now,
   },
   image: {
@@ -26,7 +27,6 @@ const festivalSchema = new Schema({
   },
   email: {
     type: String,
-    required: true,
   },
 });
 
