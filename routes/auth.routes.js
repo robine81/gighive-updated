@@ -69,6 +69,7 @@ router.post('/signup', isLoggedOut, (req, res) => {
         // Create a user and save it in the database
         return User.create({
           username,
+          email,
           password: hashedPassword,
         })
       })
@@ -78,7 +79,7 @@ router.post('/signup', isLoggedOut, (req, res) => {
         res.redirect('/')
       })
       .catch(error => {
-         console.error(error)
+        //  console.error(error)
         if (error instanceof mongoose.Error.ValidationError) {
           return res.status(400).render('auth/signup', { errorMessage: error.message })
         }
