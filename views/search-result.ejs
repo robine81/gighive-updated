@@ -1,0 +1,1 @@
+<h1>Search Result Page</h1>

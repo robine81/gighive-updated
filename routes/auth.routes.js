@@ -180,4 +180,14 @@ router.post('/logout', isLoggedIn, (req, res) => {
   })
 }) 
 
+/* GET add festival*/ 
+router.get('/add-festival', isLoggedIn, (req, res, next) => {
+  res.render('auth/add-festival');
+});
+
+/* GET edit festival*/ 
+router.get('/edit-festival', isLoggedIn, (req, res, next) => {
+  res.render('auth/edit-festival');
+});
+
 module.exports = router
