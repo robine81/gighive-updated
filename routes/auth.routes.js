@@ -142,7 +142,7 @@ router.post('/login', isLoggedOut, (req, res, next) => {
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
 
         /********************* SHOULD WE redirect to /profile here???? ***************/
-        return res.redirect('profile')
+        return res.redirect('/')
       })
     })
 
@@ -152,11 +152,6 @@ router.post('/login', isLoggedOut, (req, res, next) => {
       next(err)
       // return res.status(500).render("auth/login", { errorMessage: err.message });
     })
-})
-
-// GET /auth/profile
-router.get('/profile', isLoggedIn, (req, res) => {
-  res.render('auth/profile', { user: req.session.user })
 })
 
 // GET /auth/logout
