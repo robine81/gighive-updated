@@ -12,11 +12,6 @@ router.get("/index", (req, res, next) => {
   res.render("index");
 });
 
-/* GET one festival page with ID*/ 
-router.get('/festival', (req, res) => {
-  res.render('festival');
-});
-
 /* GET search result*/ 
 router.get('/search-result', (req, res) => {
   res.render('search-result');
