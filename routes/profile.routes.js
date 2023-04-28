@@ -11,12 +11,15 @@ const isLoggedOut = require('../middleware/isLoggedOut')
 const isLoggedIn = require('../middleware/isLoggedIn')
 
 /* GET one profile*/ 
-router.get('/profile', (req, res) => {
-    res.render('profile/profile');
+router.get('/profile/:profileId', async (req, res) => {
+    /* const showProfile = await User.findById (req.params.profileId); */
+    /* res.render('profile/profile/'); */
+    console.log("in here")
   });
 
-router.post('/profile', async (req,res) => {
-    const editProfile = await Usermodel.create(req.body);
+router.post('/profile/:profileId', async (req,res) => {
+    /* const editProfile = await User.findByIdAndUpdate (profileId, req.body, {new: true});
+    res.render('profile/profile'); */
   })
 
 module.exports = router
