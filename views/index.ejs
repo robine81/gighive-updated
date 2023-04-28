@@ -1,2 +1,17 @@
 <h1><%= appTitle %> 🚀</h1>
+
+<h1>Search</h1>
+<form action="/festival-search" method="GET">
+  <input type="text" name="name" />
+  <button type="submit">Search</button>
+</form>
+
 <p>All the festivals here!</p>
+
+<ul>
+<% allFestivals.forEach(festival => { %>
+   <li>
+        <h3><%-festival.name%></h3>
+    </li>
+    <% }) %>
+</ul>

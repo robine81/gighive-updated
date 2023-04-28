@@ -1,1 +1,39 @@
 <h1>Edit festival Page</h1>
+
+<h1>ADD NEW FESTIVAL</h1>
+
+<form action="/festival/edit-festival/<%-festivalToEdit._id%>" method="POST">
+    <label>
+      Name of Festival (*) <%-
+      <input type="text" name="name" required />
+    </label>
+    <label>
+        Name of Venue (*)
+        <input type="text" name="venue" required/>
+      </label>
+      <label>
+       Info
+        <input type="text" name="textInfo" />
+      </label>
+      <label>
+        Genre (*)
+        <input type="text" name="genre" required/>
+      </label>
+      <label>
+        Date (*)
+        <input type="text" name="date" required/>
+      </label>
+      <label>
+        Artwork
+        <input type="text" name="image" />
+      </label>
+      <label>
+        Social Media
+        <input type="text" name="socialMedia" />
+      </label>
+  
+    <button type="submit">Add new festival</button>
+  </form>
+  
+  <% if (typeof errorMessage !== 'undefined') { %> <%= errorMessage %> <% } %>
+  

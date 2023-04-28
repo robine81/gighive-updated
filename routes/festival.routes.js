@@ -15,7 +15,7 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 
 /* GET one festival page with ID*/ 
 router.get('/festival', (req, res) => {
-    res.render('festival');
+    res.render('festival/festival');
   });
 
 
@@ -54,7 +54,7 @@ router.get('/add-festival', isLoggedIn, (req, res, next) => {
             image,
             socialMedia
           })
-          console.log(createdFestival)
+          res.render('festival/festival-added', {createdFestival});
         }
     }
     catch(error) 
@@ -64,20 +64,30 @@ router.get('/add-festival', isLoggedIn, (req, res, next) => {
       }
       return res.status(500).render('festival/add-festival', { errorMessage: error.message })
     }
-
-   // res.render('festival-added');
   })
   
   
   /* GET edit festival*/ 
-  router.get('/edit-festival', isLoggedIn, (req, res, next) => {
-    res.render('festival/edit-festival');
+  router.get('/edit-festival/:festivalId', isLoggedIn, async(req, res, next) => {
+  const festivalToEdit = await Festival.findById(req.params.festivalId)
+
+  console.log("here is the festival id", festivalToEdit);
+  res.render("festival/edit-festival", { festivalToEdit });
   });
-  
-  
-  /* POST edit festival*/ 
-  router.post('/edit-festival', isLoggedIn, (req, res, next) => {
-    res.render('festival/edit-festival');
-  });
+
+    /* POST edit festival*/ 
+  // router.post("/edit/:movieId", isLoggedIn, async (req, res, next) => {
+  //   const { movieId } = req.params;
+  //   const updatedMovie = await MovieModel.findByIdAndUpdate(movieId, req.body, {
+  //     new: true,
+  //   });
+  //   console.log("updated movie", updatedMovie);
+  //   res.redirect("/movies/all-movies");
+  // });
+  // router.get("/delete/:movieId", async (req, res) => {
+  //   const { movieId } = req.params;
+  //   await MovieModel.findByIdAndDelete(movieId);
+  //   res.redirect("/movies/all-movies");
+  // });
 
   module.exports = router
