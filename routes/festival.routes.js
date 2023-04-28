@@ -15,7 +15,7 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 
 /* GET one festival page with ID*/ 
 router.get('/festival', (req, res) => {
-    res.render('festival');
+    res.render('festival/festival');
   });
 
 
@@ -25,70 +25,69 @@ router.get('/add-festival', isLoggedIn, (req, res, next) => {
   });
   
   /* POST add festival*/ 
-  router.post('/add-festival', isLoggedIn, (req, res, next) => {
+  router.post('/add-festival', isLoggedIn, async (req, res, next) => {
 
-    ///////////////////START FROM HERE TO PUT IN THE CORRECT OBJECT////////////////
-    const newFestival = req.body
+    const {name, venue, textInfo, genre, date, image, socialMedia} = req.body
   
-    // Check that name, venue, textInfo, genre, date, image, email are provided
-    if (name === '' || venue === '' || genre === '' || date === '') {
-      res.status(400).render('festival/add-festival', {
-        errorMessage: 'These fields are mandatory. Please provide the name of the festival, venue, genre, date',
-      })
+    try 
+    {
+    // Check that name, venue, genre, date are provided
+      if (name === '' || venue === '' || genre === '' || date === '') {
+        res.status(400).render('festival/add-festival', {
+          errorMessage: 'Please provide the name of the festival, venue, genre, date. These fields are mandatory.',
+        })
+      }
+
+      // Search the database for a festival with the name submitted in the form
+      const foundUser = await Festival.findOne({ name })
+        // If the festival is found, send the message festival is taken
+        if (foundUser) {
+          return res.status(400).render('festival/add-festival', { errorMessage: 'Festival already in there.' })
+        } else 
+        {
+            const createdFestival = await Festival.create({
+            name,
+            venue,
+            textInfo,
+            genre,
+            date,
+            image,
+            socialMedia
+          })
+          res.render('festival/festival-added', {createdFestival});
+        }
     }
-
-    /*
-    
-    // Search the database for a festival with the name submitted in the form
-Festival.findOne({ name }).then(found => {
-  // If the festival is found, send the message festival is taken
-  if (found) {
-    return res.status(400).render('auth/add-festival', { errorMessage: 'Festival already in there.' })
-  }
-
-Festival.create({
-    username,
-    email,
-    password: hashedPassword,
+    catch(error) 
+    {
+      if (error instanceof mongoose.Error.ValidationError) {
+        return res.status(400).render('festival/add-festival', { errorMessage: error.message })
+      }
+      return res.status(500).render('festival/add-festival', { errorMessage: error.message })
+    }
   })
-})
-.catch(error => {
-  //  console.error(error)
-  if (error instanceof mongoose.Error.ValidationError) {
-    return res.status(400).render('auth/signup', { errorMessage: error.message })
-  }
-  if (error.code === 11000) {
-    return res
-      .status(400)
-      .render('auth/signup', {
-        errorMessage: 'Username need to be unique. The username you chose is already in use.',
-      })
-  }
-  return res.status(500).render('auth/signup', { errorMessage: error.message })
-})
-
-    
-    
-    
-    
-    
-    
-    
-    */ 
-
-    res.render('festival/festival-added');
-  });
   
   
   /* GET edit festival*/ 
-  router.get('/edit-festival', isLoggedIn, (req, res, next) => {
-    res.render('festival/edit-festival');
+  router.get('/edit-festival/:festivalId', isLoggedIn, async(req, res, next) => {
+  const festivalToEdit = await Festival.findById(req.params.festivalId)
+
+  console.log("here is the festival id", festivalToEdit);
+  res.render("festival/edit-festival", { festivalToEdit });
   });
-  
-  
-  /* POST edit festival*/ 
-  router.post('/edit-festival', isLoggedIn, (req, res, next) => {
-    res.render('festival/edit-festival');
-  });
+
+    /* POST edit festival*/ 
+  // router.post("/edit/:movieId", isLoggedIn, async (req, res, next) => {
+  //   const { movieId } = req.params;
+  //   const updatedMovie = await MovieModel.findByIdAndUpdate(movieId, req.body, {
+  //     new: true,
+  //   });
+  //   console.log("updated movie", updatedMovie);
+  //   res.redirect("/movies/all-movies");
+  // });
+  // router.get("/delete/:movieId", async (req, res) => {
+  //   const { movieId } = req.params;
+  //   await MovieModel.findByIdAndDelete(movieId);
+  //   res.redirect("/movies/all-movies");
+  // });
 
   module.exports = router
