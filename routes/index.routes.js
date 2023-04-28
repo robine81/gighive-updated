@@ -4,6 +4,9 @@ const router = express.Router();
 
 const mongoose = require('mongoose')
 
+// Require the User model in order to interact with the database
+const User = require('../models/User.model')
+
 // Require the Festival model in order to interact with the database
 const Festival = require('../models/Festival.model')
 
@@ -15,9 +18,9 @@ router.get("/", async (req, res, next) => {
 });
 
 /* GET index page */
-router.get("/index", (req, res, next) => {
-  res.render("index");
-});
+// router.get("/index", (req, res, next) => {
+//   res.render("index");
+// });
 
 /* GET search result*/ 
 router.get('/search-result', (req, res) => {
