@@ -21,7 +21,7 @@ const festivalSchema = new Schema({
     required: true,
     default: Date.now,
   },
-  image: {
+  imageUrl: {
     type: String,
     default: "https://images.media-allrecipes.com/images/75131.jpg",
   },

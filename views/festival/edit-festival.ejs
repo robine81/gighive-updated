@@ -2,7 +2,7 @@
 
 <h1>ADD NEW FESTIVAL</h1>
 
-<form action="/festival/edit-festival/<%-festivalToEdit._id%>" method="POST">
+<form action="/festival/edit-festival/<%-festivalToEdit._id%>" method="POST enctype="multipart/form-data">
     <label>
       Name of Festival (*) <%-
       <input type="text" name="name" required />
@@ -25,7 +25,7 @@
       </label>
       <label>
         Artwork
-        <input type="text" name="image" />
+        <input type="file" name="image" />
       </label>
       <label>
         Social Media

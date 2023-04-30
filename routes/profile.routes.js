@@ -1,7 +1,11 @@
 const express = require('express')
 const router = express.Router()
 
+const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
+
+// How many rounds should bcrypt run the salt (default - 10 rounds)
+const saltRounds = 10
 
 // Require the User model in order to interact with the database
 const User = require('../models/User.model')
@@ -20,18 +24,20 @@ router.get('/profile', (req, res) => {
 router.get('/edit-profile', async (req, res) => {
   /* const showProfile = await User.findById (req.params.profileId); */
   //res.render('profile/edit-profile/')
-  console.log("GETTTTTTTT")
 });
 
 /* POST edit profile */
-/*FIX THE ID FOR THE SESSION!!!!!! */
-router.post("/edit-profile", async (req, res) => {
+router.post("/edit-profile", isLoggedIn, async (req, res) => {
   const sessionId = await req.session.user._id
-  console.log("Session Iddddd: ", sessionId)
-  // const profileToEdit = await User.findById(req.params.sessionId)
-  // console.log("here is the user to edit", profileToEdit);
-  res.send('edit page')
-  // res.render("profile/edit-profile", { profileToEdit });
+  const profileToEdit = await User.findById(sessionId)
+  res.render("profile/edit-profile", {profileToEdit});
 });
+
+/* POST profile edited */
+router.post("/profile-edited", isLoggedIn, async (req, res) => {
+  // const {name, surname, username, country, email, password} = req.body
+  // const { userId } = req.sessionID
+  // const updatedUser = await User.findByIdAndUpdate(userId, req.body, { new: true });
+})
 
 module.exports = router

@@ -1,6 +1,6 @@
 <h1>ADD NEW FESTIVAL</h1>
 
-<form action="/festival/add-festival" method="POST">
+<form action="/festival/add-festival" method="POST" enctype="multipart/form-data">
     <label>
       Name of Festival (*) 
       <input type="text" name="name" />
@@ -23,7 +23,7 @@
       </label>
       <label>
         Artwork
-        <input type="text" name="image" />
+        <input type="file" name="image" />
       </label>
       <label>
         Social Media
