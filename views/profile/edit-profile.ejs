@@ -2,25 +2,22 @@
 
      <h2>Welcome, <%= profileToEdit.username %>!</h2>
       <p>This is your profile page my friend!</p>
-        <button> <a href="./profile">Reload the page</a> </button>
+        <button> <a href="./edit-profile">Reload the page</a> </button>
         <form id="userForm" action="/profile/profile-edited" method="POST">
-            <label for="name">Name: <%= profileToEdit.name %></label>
-            <input type="text" name="name">
+            <label for="name">Name:</label>
+            <input type="text" name="name" value="<%= profileToEdit.name %>">
             
-            <label for="surname">Surname: <%= profileToEdit.surname %></label>
-            <input type="text" name="name">
+            <label for="surname">Surname:</label>
+            <input type="text" name="surname" value="<%= profileToEdit.surname %>">
             
-            <label for="username">Username: <%= profileToEdit.username %></label>
-            <input type="text" name="username">
+            <label for="username">Username:</label>
+            <input type="text" name="username" value="<%= profileToEdit.username %>">
             
-            <label for="country">Country: <%= profileToEdit.country %></label>
-            <input type="text"  name="country">
+            <label for="country">Country: </label>
+            <input type="text"  name="country" value="<%= profileToEdit.country %>">
             
-            <label for="email">Email: <%= profileToEdit.email %></label>
-            <input type="email" name="email">
-            
-            <label for="password">Password:</label>
-            <input type="password" name="password">
+            <label for="email">Email:</label>
+            <input type="email" name="email" value="<%= profileToEdit.email %>">
             
             <button type="submit">Edit profile</button>
         </form>

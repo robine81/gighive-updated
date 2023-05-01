@@ -16,6 +16,7 @@
 <% allFestivals.forEach(festival => { %>
    <li>
         <h3><%-festival.name%></h3>
+        <a href="/festival/edit-festival/<%-festival._id%>">Edit Festival</a>
     </li>
     <% }) %>
 </ul>

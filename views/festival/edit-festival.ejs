@@ -1,38 +1,30 @@
 <h1>Edit festival Page</h1>
 
-<h1>ADD NEW FESTIVAL</h1>
+<h1>Festival Edit</h1>
 
-<form action="/festival/edit-festival/<%-festivalToEdit._id%>" method="POST enctype="multipart/form-data">
-    <label>
-      Name of Festival (*) <%-
-      <input type="text" name="name" required />
-    </label>
-    <label>
-        Name of Venue (*)
-        <input type="text" name="venue" required/>
-      </label>
-      <label>
-       Info
-        <input type="text" name="textInfo" />
-      </label>
-      <label>
-        Genre (*)
-        <input type="text" name="genre" required/>
-      </label>
-      <label>
-        Date (*)
-        <input type="text" name="date" required/>
-      </label>
-      <label>
-        Artwork
-        <input type="file" name="image" />
-      </label>
-      <label>
-        Social Media
-        <input type="text" name="socialMedia" />
-      </label>
+<form action="/festival/edit-festival/<%-festivalToEdit._id%>" method="POST" enctype="multipart/form-data">
+  <label for="name">Festival Name:</label>
+  <input type="text" name="name" value="<%= festivalToEdit.name %>">
   
-    <button type="submit">Add new festival</button>
+  <label for="venue">venue:</label>
+  <input type="text" name="venue" value="<%= festivalToEdit.venue %>">
+  
+  <label for="textInfo">textInfo:</label>
+  <input type="text" name="textInfo" value="<%= festivalToEdit.textInfo %>">
+  
+  <label for="genre">genre: </label>
+  <input type="text"  name="genre" value="<%= festivalToEdit.genre %>">
+  
+  <label for="date">date:</label>
+  <input type="date" name="date" value="<%= festivalToEdit.date %>">
+
+  <label for="imageUrl">imageUrl:</label>
+  <input type="text" name="imageUrl" value="<%= festivalToEdit.imageUrl %>">
+
+  <label for="socialMedia">Social Media:</label>
+  <input type="text" name="socialMedia" value="<%= festivalToEdit.socialMedia %>">
+  
+  <button type="submit">Edit festival</button>
   </form>
   
   <% if (typeof errorMessage !== 'undefined') { %> <%= errorMessage %> <% } %>

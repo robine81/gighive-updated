@@ -17,11 +17,6 @@ router.get("/", async (req, res, next) => {
   res.render("index", { allFestivals });
 });
 
-/* GET index page */
-// router.get("/index", (req, res, next) => {
-//   res.render("index");
-// });
-
 /* GET search result*/ 
 router.get('/search-result', (req, res) => {
   res.render('search-result');

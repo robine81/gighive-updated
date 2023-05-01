@@ -3,9 +3,6 @@ const router = express.Router()
 
 const mongoose = require('mongoose')
 
-// Require the User model in order to interact with the database
-const User = require('../models/User.model')
-
 // Require the Festival model in order to interact with the database
 const Festival = require('../models/Festival.model')
 
@@ -67,29 +64,23 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
     return res.status(500).render('festival/add-festival', { errorMessage: error.message })
   }
 })
-  
-  
-  /* GET edit festival*/ 
-  router.get('/edit-festival/:festivalId', isLoggedIn, async(req, res, next) => {
-  const festivalToEdit = await Festival.findById(req.params.festivalId)
 
-  console.log("here is the festival id", festivalToEdit);
-  res.render("festival/edit-festival", { festivalToEdit });
+  /* GET edit festival */
+  router.get("/edit-festival/:festivalId", isLoggedIn, async (req, res) => {
+    const festivalToEdit = await Festival.findById(req.params.festivalId)
+    
+    const allFestivals = await Festival.find();
+    res.render("festival/edit-festival", { festivalToEdit, allFestivals });
   });
-
-  /* POST edit festival*/ 
-// router.post("/edit/:movieId", isLoggedIn, fileUploader.single('image'), async (req, res, next) => {
-//   const { movieId } = req.params;
-//   const updatedMovie = await MovieModel.findByIdAndUpdate(movieId, req.body, {
-//     new: true,
-//   });
-//   console.log("updated movie", updatedMovie);
-//   res.redirect("/movies/all-movies");
-// });
-// router.get("/delete/:movieId", async (req, res) => {
-//   const { movieId } = req.params;
-//   await MovieModel.findByIdAndDelete(movieId);
-//   res.redirect("/movies/all-movies");
-// });
+  
+  /* POST festival edited */
+  router.post("/edit-festival/:festivalId", isLoggedIn, fileUploader.single('image'), async (req, res) => {
+    console.log('Req body: ', req.body)
+    console.log('Req params: ', req.params) 
+    const festivalId = req.params.festivalId
+    const {name, venue, textInfo, genre, date, imageUrl, socialMedia} = req.body
+    const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
+  res.redirect("/profile/profile");
+  });
 
   module.exports = router
