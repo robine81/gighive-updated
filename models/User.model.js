@@ -33,14 +33,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // festivals: [
-    //   {
-    //     type: Schema.Types.ObjectsId,
-    //     ref: "festival",
-    //   },
-    // ],
   },
-
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,

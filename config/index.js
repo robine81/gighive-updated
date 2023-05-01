@@ -29,7 +29,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 
 // Connects the mongo uri to maintain the same naming structure
-const MONGO_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/Gighive'
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/Gighive'
 
 // Middleware configuration
 module.exports = app => {
@@ -55,7 +55,7 @@ module.exports = app => {
   // ℹ️ Middleware that adds a "req.session" information and later to check that you are who you say you are 😅
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || 'super hyper secret key',
+      secret: process.env.SESS_SECRET || 'super hyper secret key',
       resave: false,
       saveUninitialized: false,
       store: MongoStore.create({

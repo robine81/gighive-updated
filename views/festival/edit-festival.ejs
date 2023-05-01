@@ -1,6 +1,5 @@
 <h1>Edit festival Page</h1>
 
-<h1>Festival Edit</h1>
 
 <form action="/festival/edit-festival/<%-festivalToEdit._id%>" method="POST" enctype="multipart/form-data">
   <label for="name">Festival Name:</label>
@@ -17,12 +16,16 @@
   
   <label for="date">date:</label>
   <input type="date" name="date" value="<%= festivalToEdit.date %>">
-
+  </br>
   <label for="imageUrl">imageUrl:</label>
-  <input type="text" name="imageUrl" value="<%= festivalToEdit.imageUrl %>">
+  <img src="<%= festivalToEdit.imageUrl %>" alt="artwork"/>
+  <input type="file" name="imageUrl">
 
   <label for="socialMedia">Social Media:</label>
   <input type="text" name="socialMedia" value="<%= festivalToEdit.socialMedia %>">
+
+  <label for="createdBy">Created by:</label>
+  <input type="text" name="createdBy" value="<%= festivalToEdit.createdBy._id %>">
   
   <button type="submit">Edit festival</button>
   </form>

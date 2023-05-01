@@ -6,6 +6,9 @@ const mongoose = require('mongoose')
 // Require the Festival model in order to interact with the database
 const Festival = require('../models/Festival.model')
 
+// Require the User model in order to interact with the database
+const User = require('../models/User.model')
+
 // Require necessary (isLoggedOut and isLoggedIn) middleware in order to control access to specific routes
 const isLoggedOut = require('../middleware/isLoggedOut')
 const isLoggedIn = require('../middleware/isLoggedIn')
@@ -38,12 +41,15 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
     }
 
     // Search the database for a festival with the name submitted in the form
-    const foundUser = await Festival.findOne({ name })
+    const foundFestival = await Festival.findOne({ name })
+    //continue here!!!!!
+    const {createdBy} = req.session.user._id
       // If the festival is found, send the message festival is taken
-      if (foundUser) {
+      if (foundFestival) {
         return res.status(400).render('festival/add-festival', { errorMessage: 'Festival already in there.' })
       } else 
       {
+
           const createdFestival = await Festival.create({
           name,
           venue,
@@ -51,8 +57,10 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
           genre,
           date,
           image,
-          socialMedia
+          socialMedia,
+          createdBy
         })
+        console.log('This is the created by id: ', foundFestival.createdBy)
         res.render('festival/festival-added', {createdFestival});
       }
   }
@@ -67,20 +75,26 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
 
   /* GET edit festival */
   router.get("/edit-festival/:festivalId", isLoggedIn, async (req, res) => {
-    const festivalToEdit = await Festival.findById(req.params.festivalId)
+    try {
+      const festivalToEdit = await Festival.findById(req.params.festivalId)
     
-    const allFestivals = await Festival.find();
-    res.render("festival/edit-festival", { festivalToEdit, allFestivals });
+      const allFestivals = await Festival.find();
+      res.render("festival/edit-festival", { festivalToEdit, allFestivals });
+    } catch (err){
+      console.error('There is an error with the edit festival page' , err)
+    }  
   });
   
   /* POST festival edited */
   router.post("/edit-festival/:festivalId", isLoggedIn, fileUploader.single('image'), async (req, res) => {
-    // console.log('Req body: ', req.body)
-    // console.log('Req params: ', req.params) 
-    const festivalId = req.params.festivalId
-    const {name, venue, textInfo, genre, date, imageUrl, socialMedia} = req.body
-    const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
-  res.redirect("/profile/profile");
+    try {    
+      const festivalId = req.params.festivalId
+      const {name, venue, textInfo, genre, date, imageUrl, socialMedia, createdBy} = req.body
+      const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia, createdBy}, {new: true,});
+      res.redirect("/profile/profile");
+    } catch (err){
+      console.error('There is an error with the edit festival page' , err)
+    }
   });
 
   module.exports = router

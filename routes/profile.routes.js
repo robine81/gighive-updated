@@ -19,26 +19,39 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 
 /* GET one profile*/ 
 router.get('/profile', isLoggedIn, async (req, res) => {
-  const allFestivals = await Festival.find()
-  const sessionId = req.session.user._id
-  const user = await User.findById(sessionId)
-  res.render('profile/profile', {user, allFestivals})
+  try {
+    const allFestivals = await Festival.find()
+    const sessionId = req.session.user._id
+    const user = await User.findById(sessionId)
+    const oneFestival = await Festival.findOne(req.body.name)
+    res.render('profile/profile', {user, allFestivals})
+  } catch(err){
+    console.error('There is an error with the profile page' , err)
+  }
 });
 
 
 /* POST edit profile */
 router.post("/edit-profile", isLoggedIn, async (req, res) => {
-  const sessionId = req.session.user._id
-  const profileToEdit = await User.findById(sessionId)
-  res.render("profile/edit-profile", {profileToEdit});
+  try {
+    const sessionId = req.session.user._id
+    const profileToEdit = await User.findById(sessionId)
+    res.render("profile/edit-profile", {profileToEdit});
+  } catch (err){
+    console.error('There is an error with the edit profile page' , err)
+  }
 });
 
 /* POST profile edited */
 router.post("/profile-edited", isLoggedIn, async (req, res) => {
-  const sessionId = req.session.user._id
+  try {
+    const sessionId = req.session.user._id
   const {name, surname, username, country, email} = req.body
   const updatedUser = await User.findByIdAndUpdate(sessionId, {name, surname, username, country, email}, { new: true });
-  res.redirect("profile");
+  res.redirect("profile");}
+  catch (err){
+    console.error('There is an error with the edited profile page' , err)
+  }
 })
 
 module.exports = router

@@ -161,7 +161,6 @@ router.get('/logout', isLoggedIn, (req, res) => {
       res.status(500).render('auth/logout', { errorMessage: err.message })
       return
     }
-
     res.redirect('/')
   })
 })
