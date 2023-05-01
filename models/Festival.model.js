@@ -28,6 +28,12 @@ const festivalSchema = new Schema({
   socialMedia: {
     type: String,
   },
+  cast: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "celeb",
+    },
+  ],
 });
 
 const FestivalModel = model("festival", festivalSchema);
