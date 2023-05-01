@@ -33,12 +33,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    /* festivals: [
-      {
-        type: Schema.Types.ObjectsId,
-        ref: "festival",
-      },
-    ], */
+    // festivals: [
+    //   {
+    //     type: Schema.Types.ObjectsId,
+    //     ref: "festival",
+    //   },
+    // ],
   },
 
   {

@@ -75,8 +75,8 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
   
   /* POST festival edited */
   router.post("/edit-festival/:festivalId", isLoggedIn, fileUploader.single('image'), async (req, res) => {
-    console.log('Req body: ', req.body)
-    console.log('Req params: ', req.params) 
+    // console.log('Req body: ', req.body)
+    // console.log('Req params: ', req.params) 
     const festivalId = req.params.festivalId
     const {name, venue, textInfo, genre, date, imageUrl, socialMedia} = req.body
     const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
