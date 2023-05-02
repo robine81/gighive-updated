@@ -18,7 +18,7 @@ const isLoggedOut = require('../middleware/isLoggedOut')
 const isLoggedIn = require('../middleware/isLoggedIn')
 
 /* GET one profile*/ 
-router.get('/profile', isLoggedIn, async (req, res) => {
+router.get('/profile', isLoggedIn, async (req, res, next) => {
   try {
     const userId = req.session.user._id
     const user = await User.findById(userId)

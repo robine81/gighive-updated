@@ -6,11 +6,12 @@
   <button type="submit">Search</button>
 </form>
 
-<a href="/profile/profile">Profile</a>
-
-<form action="/profile/edit-profile" method="POST">
-  <button type="submit">Edit Profile</button>
-</form>
+<% if (user) { %>
+  <a href="/profile/profile">Profile</a> 
+  <form action="/profile/edit-profile" method="POST">
+    <button type="submit">Edit Profile</button>
+  </form>
+<% } %>
 
 <p>All the festivals here!</p>
 
