@@ -17,9 +17,4 @@ router.get("/", async (req, res, next) => {
   res.render("index", { allFestivals });
 });
 
-/* GET search result*/ 
-router.get('/search-result', (req, res) => {
-  res.render('search-result');
-});
-
 module.exports = router;

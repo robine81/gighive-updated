@@ -20,16 +20,15 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 /* GET one profile*/ 
 router.get('/profile', isLoggedIn, async (req, res) => {
   try {
-    const allFestivals = await Festival.find()
-    const sessionId = req.session.user._id
-    const user = await User.findById(sessionId)
-    const oneFestival = await Festival.findOne(req.body.name)
+    const userId = req.session.user._id
+    const user = await User.findById(userId)
+    const allFestivals = await Festival.find({createdBy:userId})
+        
     res.render('profile/profile', {user, allFestivals})
   } catch(err){
     console.error('There is an error with the profile page' , err)
   }
 });
-
 
 /* POST edit profile */
 router.post("/edit-profile", isLoggedIn, async (req, res) => {

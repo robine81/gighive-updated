@@ -18,10 +18,10 @@
 <p>Festivals you have added</p>
 
 <ul>
-<% allFestivals.forEach(festival => { %>
-   <li>
+  <% allFestivals.forEach(festival => { %>
+      <li>
         <h3><%-festival.name%></h3>
         <a href="/festival/edit-festival/<%-festival._id%>">Edit Festival</a>
-    </li>
-    <% }) %>
+      </li>
+  <% }) %>
 </ul>

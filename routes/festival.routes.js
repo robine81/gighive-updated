@@ -42,14 +42,13 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
 
     // Search the database for a festival with the name submitted in the form
     const foundFestival = await Festival.findOne({ name })
-    //continue here!!!!!
-    const {createdBy} = req.session.user._id
+    const createdBy = req.session.user._id
+
       // If the festival is found, send the message festival is taken
       if (foundFestival) {
         return res.status(400).render('festival/add-festival', { errorMessage: 'Festival already in there.' })
       } else 
       {
-
           const createdFestival = await Festival.create({
           name,
           venue,
@@ -60,7 +59,6 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
           socialMedia,
           createdBy
         })
-        console.log('This is the created by id: ', foundFestival.createdBy)
         res.render('festival/festival-added', {createdFestival});
       }
   }
@@ -89,8 +87,8 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
   router.post("/edit-festival/:festivalId", isLoggedIn, fileUploader.single('image'), async (req, res) => {
     try {    
       const festivalId = req.params.festivalId
-      const {name, venue, textInfo, genre, date, imageUrl, socialMedia, createdBy} = req.body
-      const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia, createdBy}, {new: true,});
+      const {name, venue, textInfo, genre, date, imageUrl, socialMedia} = req.body
+      const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
       res.redirect("/profile/profile");
     } catch (err){
       console.error('There is an error with the edit festival page' , err)
