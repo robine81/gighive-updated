@@ -1,37 +1,45 @@
-<h1>ADD NEW FESTIVAL</h1>
-
-<form action="/festival/add-festival" method="POST" enctype="multipart/form-data">
-    <label>
-      Name of Festival (*) 
-      <input type="text" name="name" />
-    </label>
-    <label>
-        Name of Venue (*)
-        <input type="text" name="venue" />
-      </label>
-      <label>
-       Info
-        <input type="text" name="textInfo" />
-      </label>
-      <label>
-        Genre (*)
-        <input type="text" name="genre" />
-      </label>
-      <label>
-        Date (*)
-        <input type="date" name="date" />
-      </label>
-      <label>
-        Artwork
-        <input type="file" name="image" />
-      </label>
-      <label>
-        Social Media
-        <input type="text" name="socialMedia" />
-      </label>
-  
-    <button type="submit">Add new festival</button>
-  </form>
-  
-  <% if (typeof errorMessage !== 'undefined') { %> <%= errorMessage %> <% } %>
-  
+<div class="jumbotron">
+  <div class="container">
+    <h1>SUBMIT FESTIVAL</h1>
+    <form action="/festival/add-festival" method="POST" enctype="multipart/form-data">
+        <label>
+          Name of Festival
+          <input type="text" name="name" />
+        </label>
+        <label>
+            Name of Venue
+            <input type="text" name="venue" />
+          </label>
+          <label>
+          Info
+            <input type="text" name="textInfo" />
+          </label>
+          <label>
+            Genre
+            <select multiple name="genre">
+              <option value="">--Please choose an option--</option>
+                <option value="dog">Dog</option>
+                <option value="cat">Cat</option>
+                <option value="hamster">Hamster</option>
+                <option value="parrot">Parrot</option>
+                <option value="spider">Spider</option>
+                <option value="goldfish">Goldfish</option>
+            </select>
+          </label>
+          <label>
+            Date
+            <input type="date" name="date" />
+          </label>
+          <label>
+            Artwork
+            <input type="file" name="image" />
+          </label>
+          <label>
+            Social Media
+            <input type="text" name="socialMedia" />
+          </label>
+        <button type="submit">Add new festival</button>
+      </form>
+      <% if (typeof errorMessage !== 'undefined') { %> <%= errorMessage %> <% } %>
+    </div>
+  </div>

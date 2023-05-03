@@ -1,27 +1,25 @@
-<h1>Profile Page</h1>
-
-<h2>Welcome, <%= user.username %>!</h2>
-  <p>This is your profile page my friend!</p>
-    <button> <a href="./profile">Reload the page</a> </button>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Account settings</h1>
     <p>Name: <%=user.name%></p>
     <p>Surname: <%=user.surname%></p>
     <p>User name: <%=user.username%></p>
     <p>Country: <%=user.country%></p>
     <p>Email: <%=user.email%></p>
 
-    <form action="/profile/edit-profile" method="POST">
-      <button type="submit">Edit Profile</button>
-    </form>
-
-    <button> <a href="../festival/add-festival">Add festival</a> </button>
-
-<p>Festivals you have added</p>
-
-<ul>
-  <% allFestivals.forEach(festival => { %>
-      <li>
-        <h3><%-festival.name%></h3>
-        <a href="/festival/edit-festival/<%-festival._id%>">Edit Festival</a>
-      </li>
-  <% }) %>
-</ul>
+    <a href="/profile/edit-profile"><button>Edit profile</button></a>
+   </div>
+  <div class="container">
+    <button> <a href="../festival/add-festival">Submit festival</a> </button>
+    <h2>Your festivals</h2>
+    <ul>
+      <% allFestivals.forEach(festival => { %>
+        <li>
+          <h3><%-festival.name%></h3>
+          <a href="/festival/edit-festival/<%-festival._id%>">Edit Festival</a>
+        </li>
+        <% }) %>
+      </ul>
+  </div>
+</div>
+</div>

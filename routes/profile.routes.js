@@ -18,7 +18,7 @@ const isLoggedOut = require('../middleware/isLoggedOut')
 const isLoggedIn = require('../middleware/isLoggedIn')
 
 /* GET one profile*/ 
-router.get('/profile', isLoggedIn, async (req, res, next) => {
+router.get('/', isLoggedIn, async (req, res, next) => {
   try {
     const userId = req.session.user._id
     const user = await User.findById(userId)
@@ -30,8 +30,8 @@ router.get('/profile', isLoggedIn, async (req, res, next) => {
   }
 });
 
-/* POST edit profile */
-router.post("/edit-profile", isLoggedIn, async (req, res) => {
+/* GET edit profile */
+router.get("/edit-profile", isLoggedIn, async (req, res) => {
   try {
     const sessionId = req.session.user._id
     const profileToEdit = await User.findById(sessionId)

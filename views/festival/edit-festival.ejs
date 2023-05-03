@@ -1,31 +1,33 @@
-<h1>Edit festival Page</h1>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Edit festival Page</h1>
+    <form action="/festival/edit-festival/<%-festivalToEdit._id%>" method="POST" enctype="multipart/form-data">
+      <label for="name">Festival Name:</label>
+      <input type="text" name="name" value="<%= festivalToEdit.name %>">
+      
+      <label for="venue">venue:</label>
+      <input type="text" name="venue" value="<%= festivalToEdit.venue %>">
+      
+      <label for="textInfo">textInfo:</label>
+      <input type="text" name="textInfo" value="<%= festivalToEdit.textInfo %>">
+      
+      <label for="genre">genre: </label>
+      <input type="text"  name="genre" value="<%= festivalToEdit.genre %>">
+      
+      <label for="date">date:</label>
+      <input type="date" name="date" value="<%= festivalToEdit.date %>">
+      </br>
+      <label for="imageUrl">imageUrl:</label>
+      <img src="<%= festivalToEdit.imageUrl %>" alt="artwork"/>
+      <input type="file" name="imageUrl">
 
-
-<form action="/festival/edit-festival/<%-festivalToEdit._id%>" method="POST" enctype="multipart/form-data">
-  <label for="name">Festival Name:</label>
-  <input type="text" name="name" value="<%= festivalToEdit.name %>">
-  
-  <label for="venue">venue:</label>
-  <input type="text" name="venue" value="<%= festivalToEdit.venue %>">
-  
-  <label for="textInfo">textInfo:</label>
-  <input type="text" name="textInfo" value="<%= festivalToEdit.textInfo %>">
-  
-  <label for="genre">genre: </label>
-  <input type="text"  name="genre" value="<%= festivalToEdit.genre %>">
-  
-  <label for="date">date:</label>
-  <input type="date" name="date" value="<%= festivalToEdit.date %>">
-  </br>
-  <label for="imageUrl">imageUrl:</label>
-  <img src="<%= festivalToEdit.imageUrl %>" alt="artwork"/>
-  <input type="file" name="imageUrl">
-
-  <label for="socialMedia">Social Media:</label>
-  <input type="text" name="socialMedia" value="<%= festivalToEdit.socialMedia %>">
-  
-  <button type="submit">Edit festival</button>
-  </form>
-  
+      <label for="socialMedia">Social Media:</label>
+      <input type="text" name="socialMedia" value="<%= festivalToEdit.socialMedia %>">
+      
+      <button type="submit">Edit festival</button>
+      </form>
+  </div>
+</div>
+      
   <% if (typeof errorMessage !== 'undefined') { %> <%= errorMessage %> <% } %>
   

@@ -13,21 +13,24 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
         crossorigin="anonymous"
       />
-      <title>Hello, the world!</title>
+      <title>Gighive</title>
   </head>
 
   <body>
     <div class="jumbotron">
-      <div class="container"><h1>This is our layout</h1></div>
+      <div class="container"></div>
       <ul>
         <li id="to-right">
           <a href="/">Home</a> <span> | </span>
-          <a href="/auth/signup">Signup</a> <span> | </span>
-          <a href="/auth/login">Login</a> <span> | </span>
+          <a href="/profile">My Account</a> <span> | </span>
           <a href="/auth/logout">Lougout</a>
           </form>
         </li>
       </ul>
+      <form action="/search" method="GET">
+        <input type="text" name="query" />
+        <button type="submit">Search</button>
+      </form>
     </div>
 
     <%- body %>

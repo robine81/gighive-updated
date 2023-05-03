@@ -22,8 +22,16 @@ router.get('/festival', (req, res) => {
 
 
 /* GET add festival*/ 
-router.get('/add-festival', isLoggedIn, (req, res, next) => {
-    res.render('festival/add-festival');
+router.get('/add-festival', isLoggedIn, async (req, res, next) => {
+    try{
+      const allFestivals = await Festival.find()
+      console.log(allFestivals)
+      res.render('festival/add-festival', {allFestivals});
+    } 
+    catch(err)
+    {
+      console.err('There was an error in adding festival: ', err)
+    }
   });
   
 /* POST add festival*/ 

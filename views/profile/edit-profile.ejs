@@ -1,23 +1,21 @@
-<h1>Profile Edit</h1>
-
-     <h2>Welcome, <%= profileToEdit.username %>!</h2>
-      <p>This is your profile page my friend!</p>
-        <button> <a href="./edit-profile">Reload the page</a> </button>
-        <form id="userForm" action="/profile/profile-edited" method="POST">
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="<%= profileToEdit.name %>">
-            
-            <label for="surname">Surname:</label>
-            <input type="text" name="surname" value="<%= profileToEdit.surname %>">
-            
-            <label for="username">Username:</label>
-            <input type="text" name="username" value="<%= profileToEdit.username %>">
-            
-            <label for="country">Country: </label>
-            <input type="text"  name="country" value="<%= profileToEdit.country %>">
-            
-            <label for="email">Email:</label>
-            <input type="email" name="email" value="<%= profileToEdit.email %>">
-            
-            <button type="submit">Edit profile</button>
-        </form>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Profile Edit</h1>
+    <h2>Welcome, <%= profileToEdit.username %>!</h2>
+    <p>This is your profile page my friend!</p>
+    <button> <a href="./edit-profile">Reload the page</a> </button>
+    <form id="userForm" action="/profile/profile-edited" method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" value="<%= profileToEdit.name %>">
+      <label for="surname">Surname:</label>
+      <input type="text" name="surname" value="<%= profileToEdit.surname %>">
+      <label for="username">Username:</label>
+      <input type="text" name="username" value="<%= profileToEdit.username %>">
+      <label for="country">Country: </label>
+      <input type="text"  name="country" value="<%= profileToEdit.country %>">
+      <label for="email">Email:</label>
+      <input type="email" name="email" value="<%= profileToEdit.email %>">
+      <button type="submit">Edit profile</button>
+    </form>
+  </div>
+</div>

@@ -12,25 +12,14 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 const isLoggedOut = require('../middleware/isLoggedOut');
 
 /* GET home page */
-router.get("/", isLoggedIn, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try { 
     const allFestivals = await Festival.find()
-    const user = req.session.user._id
-
-    console.log('Is logged in')
-    console.log('Here is the session: ', req.session)
-    console.log('Here is the user Id: ', req.session.user._id)
-    console.log('Here is the user: ', user)
-
-    if(user !== 'undefined') {
-      res.render("index", {user, allFestivals});
-
-    } else{
-      console.log('Its NOT defined')
-      res.render("index", {allFestivals});
-    }
-
+    const technoFestivals = await Festival.find({genre:'Techno'})
+    const houseFestivals = await Festival.find({genre:'House'})
+    const tranceFestivals = await Festival.find({genre:'Trance'})
     
+    res.render("index", {allFestivals, technoFestivals, houseFestivals, tranceFestivals});
   } catch(err){
     console.error('There is an error with the index page' , err)
   }

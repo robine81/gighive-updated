@@ -1,24 +1,38 @@
-<h1><%= appTitle %> 🚀</h1>
+<div class="jumbotron">
 
-<h1>Search</h1>
-<form action="/search" method="GET">
-  <input type="text" name="query" />
-  <button type="submit">Search</button>
-</form>
-
-<% if (user) { %>
-  <a href="/profile/profile">Profile</a> 
-  <form action="/profile/edit-profile" method="POST">
-    <button type="submit">Edit Profile</button>
-  </form>
-<% } %>
-
-<p>All the festivals here!</p>
-
-<ul>
-<% allFestivals.forEach(festival => { %>
-   <li>
-        <h3><%-festival.name%></h3>
-    </li>
-    <% }) %>
-</ul>
+  <div class="container">
+    <p>Filter by:</p>
+  </div>
+  <div class="container">
+    <p>TECHNO</p>
+    <ul>
+    <% technoFestivals.forEach(festival => { %>
+      <li>
+            <h3><%-festival.name%></h3>
+            <img src=<%-festival.imageUrl%> alt="Artwork">
+        </li>
+        <% }) %>
+    </ul>
+  <div class="container">
+    <p>HOUSE</p>
+    <ul>
+    <% houseFestivals.forEach(festival => { %>
+      <li>
+            <h3><%-festival.name%></h3>
+            <img src=<%-festival.imageUrl%> alt="Artwork">
+        </li>
+        <% }) %>
+    </ul>
+  </div>
+  <div class="container">
+    <p>TRANCE</p>
+    <ul>
+    <% tranceFestivals.forEach(festival => { %>
+      <li>
+            <h3><%-festival.name%></h3>
+            <img src=<%-festival.imageUrl%> alt="Artwork">
+        </li>
+        <% }) %>
+    </ul>
+  </div>
+</div>
