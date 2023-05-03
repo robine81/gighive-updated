@@ -11,8 +11,13 @@
       <label for="textInfo">textInfo:</label>
       <input type="text" name="textInfo" value="<%= festivalToEdit.textInfo %>">
       
-      <label for="genre">genre: </label>
-      <input type="text"  name="genre" value="<%= festivalToEdit.genre %>">
+      <label for="genre">Genre: <%= festivalToEdit.genre %> </label>
+      <select multiple name="genre">
+        <option value="">--Select new genre--</option>
+          <option value="House">House</option>
+          <option value="Techno">Techno</option>
+          <option value="Trance">Trance</option>
+      </select>
       
       <label for="date">date:</label>
       <input type="date" name="date" value="<%= festivalToEdit.date %>">

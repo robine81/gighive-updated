@@ -18,8 +18,12 @@ router.get("/", async (req, res, next) => {
     const technoFestivals = await Festival.find({genre:'Techno'})
     const houseFestivals = await Festival.find({genre:'House'})
     const tranceFestivals = await Festival.find({genre:'Trance'})
+    const sortedAscFestivals = await Festival.find().sort({name: 1})
+    const sortedDescFestivals = await Festival.find().sort({name: -1})
+
+    console.log('Techno festival: ', technoFestivals)
     
-    res.render("index", {allFestivals, technoFestivals, houseFestivals, tranceFestivals});
+    res.render("index", {allFestivals, technoFestivals, houseFestivals, tranceFestivals, sortedAscFestivals, sortedDescFestivals});
   } catch(err){
     console.error('There is an error with the index page' , err)
   }

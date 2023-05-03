@@ -15,60 +15,55 @@ const isLoggedIn = require('../middleware/isLoggedIn')
 
 const fileUploader = require('../config/cloudinary.config');
 
-/* GET one festival page with ID*/ 
-router.get('/festival', (req, res) => {
-    res.render('festival/festival');
-  });
 
 
 /* GET add festival*/ 
 router.get('/add-festival', isLoggedIn, async (req, res, next) => {
-    try{
-      const allFestivals = await Festival.find()
-      console.log(allFestivals)
-      res.render('festival/add-festival', {allFestivals});
-    } 
-    catch(err)
-    {
-      console.err('There was an error in adding festival: ', err)
-    }
-  });
-  
+  try{
+    const allFestivals = await Festival.find()
+    res.render('festival/add-festival', {allFestivals});
+  } 
+  catch(err)
+  {
+    console.err('There was an error in adding festival: ', err)
+  }
+});
+
 /* POST add festival*/ 
 router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (req, res, next) => {
-
+  
   const {name, venue, textInfo, genre, date, image, socialMedia} = req.body
-
+  
   try 
   {
-  // Check that name, venue, genre, date are provided
+    // Check that name, venue, genre, date are provided
     if (name === '' || venue === '' || genre === '' || date === '') {
       res.status(400).render('festival/add-festival', {
         errorMessage: 'Please provide the name of the festival, venue, genre, date. These fields are mandatory.',
       })
     }
-
+    
     // Search the database for a festival with the name submitted in the form
     const foundFestival = await Festival.findOne({ name })
     const createdBy = req.session.user._id
-
-      // If the festival is found, send the message festival is taken
-      if (foundFestival) {
-        return res.status(400).render('festival/add-festival', { errorMessage: 'Festival already in there.' })
-      } else 
-      {
-          const createdFestival = await Festival.create({
-          name,
-          venue,
-          textInfo,
-          genre,
-          date,
-          image,
-          socialMedia,
-          createdBy
-        })
-        res.render('festival/festival-added', {createdFestival});
-      }
+    
+    // If the festival is found, send the message festival is taken
+    if (foundFestival) {
+      return res.status(400).render('festival/add-festival', { errorMessage: 'Festival already in there.' })
+    } else 
+    {
+      const createdFestival = await Festival.create({
+        name,
+        venue,
+        textInfo,
+        genre,
+        date,
+        image,
+        socialMedia,
+        createdBy
+      })
+      res.render('festival/festival-added', {createdFestival});
+    }
   }
   catch(error) 
   {
@@ -79,28 +74,52 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
   }
 })
 
-  /* GET edit festival */
-  router.get("/edit-festival/:festivalId", isLoggedIn, async (req, res) => {
-    try {
-      const festivalToEdit = await Festival.findById(req.params.festivalId)
+/* GET edit festival */
+router.get("/edit-festival/:festivalId", isLoggedIn, async (req, res) => {
+  try {
+    const festivalToEdit = await Festival.findById(req.params.festivalId)
     
-      const allFestivals = await Festival.find();
-      res.render("festival/edit-festival", { festivalToEdit, allFestivals });
-    } catch (err){
-      console.error('There is an error with the edit festival page' , err)
-    }  
+    const allFestivals = await Festival.find();
+    res.render("festival/edit-festival", { festivalToEdit, allFestivals });
+  } catch (err){
+    console.error('There is an error with the edit festival page' , err)
+  }  
+});
+
+/* POST festival edited */
+router.post("/edit-festival/:festivalId", isLoggedIn, fileUploader.single('image'), async (req, res) => {
+  try {    
+    const festivalId = req.params.festivalId
+    const {name, venue, textInfo, genre, date, imageUrl, socialMedia} = req.body
+    const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
+    res.redirect("/profile");
+  } catch (err){
+    console.error('There is an error with the edit festival page' , err)
+  }
+});
+
+/* GET delete festival */
+router.get("/delete-festival/:festivalId", isLoggedIn, async (req, res) => {
+  try {
+    const { festivalId } = req.params
+    await Festival.findByIdAndDelete(festivalId);    
+    res.redirect("/profile");
+  } catch (err){
+    console.error('There is an error with the edit festival page' , err)
+  }  
+});
+
+/* GET one festival page with ID*/ 
+router.get('/:festivalId', async (req, res) => {
+  try {
+    const oneFestival = await Festival.findById(req.params.festivalId)
+    //const user = await User.findById(req.params.festivalId)
+  
+    const allFestivals = await Festival.find();
+    res.render("festival/festival", { oneFestival, allFestivals });
+  } catch (err){
+    console.error('There is an error with the edit festival page' , err)
+  }  
   });
   
-  /* POST festival edited */
-  router.post("/edit-festival/:festivalId", isLoggedIn, fileUploader.single('image'), async (req, res) => {
-    try {    
-      const festivalId = req.params.festivalId
-      const {name, venue, textInfo, genre, date, imageUrl, socialMedia} = req.body
-      const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
-      res.redirect("/profile/profile");
-    } catch (err){
-      console.error('There is an error with the edit festival page' , err)
-    }
-  });
-
-  module.exports = router
+module.exports = router

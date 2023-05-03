@@ -47,7 +47,7 @@ router.post("/profile-edited", isLoggedIn, async (req, res) => {
     const sessionId = req.session.user._id
   const {name, surname, username, country, email} = req.body
   const updatedUser = await User.findByIdAndUpdate(sessionId, {name, surname, username, country, email}, { new: true });
-  res.redirect("profile");}
+  res.redirect("/");}
   catch (err){
     console.error('There is an error with the edited profile page' , err)
   }

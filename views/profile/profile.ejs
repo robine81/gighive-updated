@@ -4,19 +4,19 @@
     <p>Name: <%=user.name%></p>
     <p>Surname: <%=user.surname%></p>
     <p>User name: <%=user.username%></p>
-    <p>Country: <%=user.country%></p>
     <p>Email: <%=user.email%></p>
 
     <a href="/profile/edit-profile"><button>Edit profile</button></a>
    </div>
   <div class="container">
-    <button> <a href="../festival/add-festival">Submit festival</a> </button>
+    <a href="../festival/add-festival"><button> Submit festival</button></a> 
     <h2>Your festivals</h2>
     <ul>
       <% allFestivals.forEach(festival => { %>
         <li>
           <h3><%-festival.name%></h3>
-          <a href="/festival/edit-festival/<%-festival._id%>">Edit Festival</a>
+          <a href="/festival/edit-festival/<%-festival._id%>"><button>Edit Festival</button></a>
+          <a href="/festival/delete-festival/<%-festival._id%>"><button>Delete Festival</button></a>
         </li>
         <% }) %>
       </ul>
