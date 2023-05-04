@@ -1,58 +1,50 @@
 <div class="jumbotron">
-  <div class="container">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#alpha">Alphabetical</a></li>
-      <li><a href="#techno">Techno</a></li>
-      <li><a href="#house">House</a></li>
-      <li><a href="#trance">Trance</a></li>
-    </ul>
-    <div class="tab-content">
-      <div id="alpha" class="tab-pane fade in active">
-        <ul>
-        <% sortedAscFestivals.forEach(sortFestival => { %>
-          <li><a href="/festival/<%-sortFestival.id%>"><button><%-sortFestival.name%></button></a>
-              <img src=<%-sortFestival.imageUrl%> alt="Artwork"></li>
-            <% }) %>
-        </ul>
-      </div>
-      <div id="techno" class="tab-pane fade">
-        <ul>
-          <% technoFestivals.forEach(technoFestival => { %>
-            <li>
-              <a href="/festival/<%-technoFestival._id%>"><button><%-technoFestival.name%></button></a>
-              <img src=<%-technoFestival.imageUrl%> alt="Artwork">
-            </li>
-            <% }) %>
-          </ul>
-      </div>
-      <div id="house"class="tab-pane fade">
-        <ul>
-          <% houseFestivals.forEach(houseFestival => { %>
-            <li>
-              <a href="/festival/<%-houseFestival._id%>"><button><%-houseFestival.name%></button></a>
-              <img src=<%-houseFestival.imageUrl%> alt="Artwork">
-            </li>
-            <% }) %>
-          </ul>
-      </div>
-      <div id="trance" class="tab-pane fade">
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#alpha">Alphabetical</a></li>
+        <li><a href="#techno">Techno</a></li>
+        <li><a href="#house">House</a></li>
+        <li><a href="#trance">Trance</a></li>
+      </ul>
+      <div class="tab-content">
+        <div id="alpha" class="tab-pane fade in active">
           <ul>
-            <% tranceFestivals.forEach(tranceFestival => { %>
-              <li>
-                <a href="/festival/<%-tranceFestival._id%>"><button><%-tranceFestival.name%></button></a>
-                <img src=<%-tranceFestival.imageUrl%> alt="Artwork">
-              </li>
+          <% sortedAscFestivals.forEach(sortFestival => { %>
+            <li><a href="/festival/<%-sortFestival.id%>"><button><%-sortFestival.name%></button></a>
+                <img src=<%-sortFestival.imageUrl%> alt="Artwork"></li>
               <% }) %>
           </ul>
+        </div>
+        <div id="techno" class="tab-pane fade">
+          <ul>
+            <% technoFestivals.forEach(technoFestival => { %>
+              <li>
+                <a href="/festival/<%-technoFestival._id%>"><button><%-technoFestival.name%></button></a>
+                <img src=<%-technoFestival.imageUrl%> alt="Artwork">
+              </li>
+              <% }) %>
+            </ul>
+        </div>
+        <div id="house"class="tab-pane fade">
+          <ul>
+            <% houseFestivals.forEach(houseFestival => { %>
+              <li>
+                <a href="/festival/<%-houseFestival._id%>"><button><%-houseFestival.name%></button></a>
+                <img src=<%-houseFestival.imageUrl%> alt="Artwork">
+              </li>
+              <% }) %>
+            </ul>
+        </div>
+        <div id="trance" class="tab-pane fade">
+            <ul>
+              <% tranceFestivals.forEach(tranceFestival => { %>
+                <li>
+                  <a href="/festival/<%-tranceFestival._id%>"><button><%-tranceFestival.name%></button></a>
+                  <img src=<%-tranceFestival.imageUrl%> alt="Artwork">
+                </li>
+                <% }) %>
+            </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<script>
-  $(document).ready(function() {
-      $(".nav-tabs a").click(function() {
-          $(this).tab('show');
-      });
-  });
-</script>
