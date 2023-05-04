@@ -30,17 +30,15 @@ router.get('/add-festival', isLoggedIn, async (req, res, next) => {
 });
 
 /* POST add festival*/ 
-router.post('/add-festival', isLoggedIn, uploader.single('imageUrl'), async (req, res, next) => {
-  
-  const {name, venue, textInfo, genre, date, image, socialMedia} = req.body
-  const imageUrl = req.file.path
-  
-  try 
-  {
+router.post('/add-festival', isLoggedIn, uploader.single('imageUrl'), async (req, res, next) => {  
+  try {
+    const {name, venue, textInfo, genre, date, socialMedia} = req.body
+    const imageUrl = req.file.path
+
     // Check that name, venue, genre, date are provided
-    if (name === '' || venue === '' || genre === '' || date === '') {
+    if (name === '' || venue === '' || genre === '' || date === '' || imageUrl === '') {
       res.status(400).render('festival/add-festival', {
-        errorMessage: 'Please provide the name of the festival, venue, genre, date. These fields are mandatory.',
+        errorMessage: 'Please provide the name of the festival, venue, genre, date and artwork. These fields are mandatory.',
       })
     }
     
@@ -88,7 +86,7 @@ router.get("/edit-festival/:festivalId", isLoggedIn, async (req, res) => {
 });
 
 /* POST festival edited */
-  router.post("/edit-festival/:festivalId", isLoggedIn, uploader.single('imageUrl'), async (req, res) => {
+  router.post("/edit-festival/:festivalId", isLoggedIn, uploader.single('imageUrl'), async (req, res, next) => {
     try {    
       const festivalId = req.params.festivalId
       const {name, venue, textInfo, genre, date, socialMedia} = req.body
@@ -99,19 +97,6 @@ router.get("/edit-festival/:festivalId", isLoggedIn, async (req, res) => {
       console.error('There is an error with the edit festival page' , err)
     }
   });
-
-//OLD CODE
-/* POST festival edited */
-// router.post("/edit-festival/:festivalId", isLoggedIn, fileUploader.single('image'), async (req, res) => {
-//   try {    
-//     const festivalId = req.params.festivalId
-//     const {name, venue, textInfo, genre, date, imageUrl, socialMedia} = req.body
-//     const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
-//     res.redirect("/profile");
-//   } catch (err){
-//     console.error('There is an error with the edit festival page' , err)
-//   }
-// });
 
 /* GET delete festival */
 router.get("/delete-festival/:festivalId", isLoggedIn, async (req, res) => {

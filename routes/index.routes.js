@@ -20,8 +20,6 @@ router.get("/", async (req, res, next) => {
     const tranceFestivals = await Festival.find({genre:'Trance'})
     const sortedAscFestivals = await Festival.find().sort({name: 1})
     const sortedDescFestivals = await Festival.find().sort({name: -1})
-
-    console.log('Techno festival: ', technoFestivals)
     
     res.render("index", {allFestivals, technoFestivals, houseFestivals, tranceFestivals, sortedAscFestivals, sortedDescFestivals});
   } catch(err){
