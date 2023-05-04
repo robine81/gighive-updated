@@ -1,12 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
+  padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00b7ff;
+  color: black;
 }
 
 h1 {
   color: 15px;
+}
+
+.jumbotron{
+  background-color: black !important;
+  color: ivory;
+}
+
+/* .jumbotron2{
+  background-image: ;
+  color: ivory;
+} */
+
+.rows-fest img {
+  width:  350px;
+  height: 350px;
+}
+
+.rows-fest {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.festtabs {
+  width: 100% !important;
+  margin: 0;
+}
+
+.gighive-logo {
+  float: right;
 }
