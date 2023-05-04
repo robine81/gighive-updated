@@ -13,7 +13,7 @@ const User = require('../models/User.model')
 const isLoggedOut = require('../middleware/isLoggedOut')
 const isLoggedIn = require('../middleware/isLoggedIn')
 
-const fileUploader = require('../config/cloudinary.config');
+const uploader = require('../middleware/cloudinary.config');
 
 
 
@@ -30,9 +30,10 @@ router.get('/add-festival', isLoggedIn, async (req, res, next) => {
 });
 
 /* POST add festival*/ 
-router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (req, res, next) => {
+router.post('/add-festival', isLoggedIn, uploader.single('imageUrl'), async (req, res, next) => {
   
   const {name, venue, textInfo, genre, date, image, socialMedia} = req.body
+  const imageUrl = req.file.path
   
   try 
   {
@@ -58,7 +59,7 @@ router.post('/add-festival', isLoggedIn, fileUploader.single('image'), async (re
         textInfo,
         genre,
         date,
-        image,
+        imageUrl,
         socialMedia,
         createdBy
       })
@@ -87,16 +88,30 @@ router.get("/edit-festival/:festivalId", isLoggedIn, async (req, res) => {
 });
 
 /* POST festival edited */
-router.post("/edit-festival/:festivalId", isLoggedIn, fileUploader.single('image'), async (req, res) => {
-  try {    
-    const festivalId = req.params.festivalId
-    const {name, venue, textInfo, genre, date, imageUrl, socialMedia} = req.body
-    const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
-    res.redirect("/profile");
-  } catch (err){
-    console.error('There is an error with the edit festival page' , err)
-  }
-});
+  router.post("/edit-festival/:festivalId", isLoggedIn, uploader.single('imageUrl'), async (req, res) => {
+    try {    
+      const festivalId = req.params.festivalId
+      const {name, venue, textInfo, genre, date, socialMedia} = req.body
+      const imageUrl = req.file.path
+      const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
+      res.redirect("/profile");
+    } catch (err){
+      console.error('There is an error with the edit festival page' , err)
+    }
+  });
+
+//OLD CODE
+/* POST festival edited */
+// router.post("/edit-festival/:festivalId", isLoggedIn, fileUploader.single('image'), async (req, res) => {
+//   try {    
+//     const festivalId = req.params.festivalId
+//     const {name, venue, textInfo, genre, date, imageUrl, socialMedia} = req.body
+//     const updatedfestival = await Festival.findByIdAndUpdate(festivalId, {name, venue, textInfo, genre, date, imageUrl, socialMedia}, {new: true,});
+//     res.redirect("/profile");
+//   } catch (err){
+//     console.error('There is an error with the edit festival page' , err)
+//   }
+// });
 
 /* GET delete festival */
 router.get("/delete-festival/:festivalId", isLoggedIn, async (req, res) => {
