@@ -1,62 +1,58 @@
 <div class="jumbotron">
   <div class="container">
-    <ul class="nav nav-tabs mb-3" id="aplhabetical" role="tablist">
-      <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab" aria-controls="ex1-tabs-1" aria-selected="true">Alphabetical</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="ex1-tab-2" data-mdb-toggle="tab" href="#ex1-tabs-2" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">Techno</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="ex1-tab-3" data-mdb-toggle="tab" href="#ex1-tabs-3" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">House</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="ex1-tab-4" data-mdb-toggle="tab" href="#ex1-tabs-4" role="tab" aria-controls="ex1-tabs-4" aria-selected="false">Trance</a>
-      </li>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#alpha">Alphabetical</a></li>
+      <li><a href="#techno">Techno</a></li>
+      <li><a href="#house">House</a></li>
+      <li><a href="#trance">Trance</a></li>
     </ul>
-      <!-- Tabs content -->
-  <div class="tab-content" id="ex1-content">
-    <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-      <ul>
-      <% sortedAscFestivals.forEach(sortFestival => { %>
-        <li>
-            <a href="/festival/<%-sortFestival.id%>"><button><%-sortFestival.name%></button></a>
-            <img src=<%-sortFestival.imageUrl%> alt="Artwork">
-          </li>
-          <% }) %>
-      </ul>
+    <div class="tab-content">
+      <div id="alpha" class="tab-pane fade in active">
+        <ul>
+        <% sortedAscFestivals.forEach(sortFestival => { %>
+          <li><a href="/festival/<%-sortFestival.id%>"><button><%-sortFestival.name%></button></a>
+              <img src=<%-sortFestival.imageUrl%> alt="Artwork"></li>
+            <% }) %>
+        </ul>
+      </div>
+      <div id="techno" class="tab-pane fade">
+        <ul>
+          <% technoFestivals.forEach(technoFestival => { %>
+            <li>
+              <a href="/festival/<%-technoFestival._id%>"><button><%-technoFestival.name%></button></a>
+              <img src=<%-technoFestival.imageUrl%> alt="Artwork">
+            </li>
+            <% }) %>
+          </ul>
+      </div>
+      <div id="house"class="tab-pane fade">
+        <ul>
+          <% houseFestivals.forEach(houseFestival => { %>
+            <li>
+              <a href="/festival/<%-houseFestival._id%>"><button><%-houseFestival.name%></button></a>
+              <img src=<%-houseFestival.imageUrl%> alt="Artwork">
+            </li>
+            <% }) %>
+          </ul>
+      </div>
+      <div id="trance" class="tab-pane fade">
+          <ul>
+            <% tranceFestivals.forEach(tranceFestival => { %>
+              <li>
+                <a href="/festival/<%-tranceFestival._id%>"><button><%-tranceFestival.name%></button></a>
+                <img src=<%-tranceFestival.imageUrl%> alt="Artwork">
+              </li>
+              <% }) %>
+          </ul>
+      </div>
     </div>
-    <div class="tab-pane fade" id="-tabs-2ex1" role="tabpanel" aria-labelledby="ex1-tab-2">
-      <ul>
-      <% technoFestivals.forEach(technoFestival => { %>
-        <li>
-            <a href="/festival/<%-technoFestival._id%>"><button><%-technoFestival.name%></button></a>
-            <img src=<%-technoFestival.imageUrl%> alt="Artwork">
-        </li>
-        <% }) %>
-      </ul>
-    </div>
-  </div>
-  <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-    <ul>
-      <% houseFestivals.forEach(houseFestival => { %>
-        <li>
-          <a href="/festival/<%-houseFestival._id%>"><button><%-houseFestival.name%></button></a>
-          <img src=<%-houseFestival.imageUrl%> alt="Artwork">
-        </li>
-        <% }) %>
-    </ul>
-  </div>
-  <div class="tab-pane fade" id="ex1-tabs-4" role="tabpanel" aria-labelledby="ex1-tab-4">
-    <ul>
-    <% tranceFestivals.forEach(tranceFestival => { %>
-      <li>
-        <a href="/festival/<%-tranceFestival._id%>"><button><%-tranceFestival.name%></button></a>
-        <img src=<%-tranceFestival.imageUrl%> alt="Artwork">
-        </li>
-        <% }) %>
-    </ul>
-  </div>
-  <!-- Tabs content -->
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+      $(".nav-tabs a").click(function() {
+          $(this).tab('show');
+      });
+  });
+</script>

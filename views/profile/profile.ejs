@@ -9,14 +9,14 @@
     <a href="/profile/edit-profile"><button>Edit profile</button></a>
    </div>
   <div class="container">
-    <a href="../festival/add-festival"><button> Submit festival</button></a> 
+    <a href="../festival/add-festival"><button> Submit a festival</button></a> 
     <h2>Your festivals</h2>
     <ul>
       <% allFestivals.forEach(festival => { %>
         <li>
           <h3><%-festival.name%></h3>
-          <a href="/festival/edit-festival/<%-festival._id%>"><button>Edit Festival</button></a>
-          <a href="/festival/delete-festival/<%-festival._id%>"><button>Delete Festival</button></a>
+          <a href="/festival/edit-festival/<%-festival._id%>"><button>Edit </button></a>
+          <a href="/festival/delete-festival/<%-festival._id%>"><button>Delete</button></a>
         </li>
         <% }) %>
       </ul>
