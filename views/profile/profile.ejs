@@ -1,25 +1,23 @@
-<div class="jumbotron1">
-  <div class="container">
+<div class="jumbotron1 profile-container">
+  <div>
     <h1>Account settings</h1>
     <p>Name: <%=user.name%></p>
     <p>Surname: <%=user.surname%></p>
     <p>User name: <%=user.username%></p>
     <p>Email: <%=user.email%></p>
-
     <a href="/profile/edit-profile"><button>Edit profile</button></a>
-   </div>
-  <div class="container">
+  </div>
+  <div>
+    <h1>Your festivals</h1>
     <a href="../festival/add-festival"><button> Submit a festival</button></a> 
-    <h2>Your festivals</h2>
     <ul>
       <% allFestivals.forEach(festival => { %>
-        <li>
-          <h3><%-festival.name%></h3>
+        <li style="list-style-type: none;">
+          <h4><%-festival.name%></h4>
           <a href="/festival/edit-festival/<%-festival._id%>"><button>Edit </button></a>
           <a href="/festival/delete-festival/<%-festival._id%>"><button>Delete</button></a>
         </li>
         <% }) %>
       </ul>
   </div>
-</div>
 </div>

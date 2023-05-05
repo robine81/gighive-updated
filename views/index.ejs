@@ -11,8 +11,8 @@
         <div id="alpha" class="tab-pane fade in active">
           <ul class="rows-fest">
           <% sortedAscFestivals.forEach(sortFestival => { %>
-            <li><a href="/festival/<%-sortFestival.id%>"><button><%-sortFestival.name%></button></a>
-                <img src=<%-sortFestival.imageUrl%> alt="Artwork"></li>
+            <li><a href="/festival/<%-sortFestival.id%>">
+                <img src=<%-sortFestival.imageUrl%> alt="Artwork"></a></li>
               <% }) %>
           </ul>
         </div>
@@ -20,8 +20,8 @@
           <ul class="rows-fest">
             <% technoFestivals.forEach(technoFestival => { %>
               <li>
-                <a href="/festival/<%-technoFestival._id%>"><button><%-technoFestival.name%></button></a>
-                <img src=<%-technoFestival.imageUrl%> alt="Artwork">
+                <a href="/festival/<%-technoFestival._id%>">
+                <img src=<%-technoFestival.imageUrl%> alt="Artwork"></a>
               </li>
               <% }) %>
             </ul>
@@ -30,8 +30,8 @@
           <ul class="rows-fest">
             <% houseFestivals.forEach(houseFestival => { %>
               <li>
-                <a href="/festival/<%-houseFestival._id%>"><button><%-houseFestival.name%></button></a>
-                <img src=<%-houseFestival.imageUrl%> alt="Artwork">
+                <a href="/festival/<%-houseFestival._id%>">
+                <img src=<%-houseFestival.imageUrl%> alt="Artwork"></a>
               </li>
               <% }) %>
             </ul>
@@ -40,8 +40,8 @@
             <ul class="rows-fest">
               <% tranceFestivals.forEach(tranceFestival => { %>
                 <li>
-                  <a href="/festival/<%-tranceFestival._id%>"><button><%-tranceFestival.name%></button></a>
-                  <img src=<%-tranceFestival.imageUrl%> alt="Artwork">
+                  <a href="/festival/<%-tranceFestival._id%>">
+                  <img src=<%-tranceFestival.imageUrl%> alt="Artwork"></a>
                 </li>
                 <% }) %>
             </ul>

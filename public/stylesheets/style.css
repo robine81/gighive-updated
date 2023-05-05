@@ -28,21 +28,96 @@ h1 {
 } */
 
 .rows-fest img {
-  width:  350px;
-  height: 350px;
+  width:  250px;
+  height: 250px;
 }
 
 .rows-fest {
     display: flex;
     list-style: none;
     flex-wrap: wrap;
+    row-gap: 40px;
+    column-gap: 30px;
 }
 
-.festtabs {
-  width: 100% !important;
-  margin: 0;
-}
+.rows-fest button {
+  background-color: white;
+  color: grey;
+  border: none;
 
+}
 .gighive-logo {
   float: right;
+}
+
+.brand-image {
+  width: 20%;
+  height: 20%;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 30rem;
+  list-style-type: none;
+}
+
+.nav-item {
+  list-style-type: none;
+}
+
+.navbar a {
+  color: white;
+  
+}
+
+.navbar a:hover {
+  color: rgb(226, 244, 249);
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 200px;
+  }
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 100px;
+}
+
+.profile-container a {
+  background-color: white;
+  color: grey;
+  border: none;
+}
+
+.festival-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 40px;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  row-gap: 100px;
+}
+.festival-img {
+  width:  350px;
+  height: 350px;
+}
+
+.left-column {
+  width: 30%;
+}
+
+.left-column a {
+  color: blueviolet;
 }
