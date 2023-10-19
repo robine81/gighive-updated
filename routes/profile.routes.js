@@ -23,7 +23,6 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     const userId = req.session.user._id
     const user = await User.findById(userId)
     const allFestivals = await Festival.find({createdBy:userId})
-        
     res.render('profile/profile', {user, allFestivals})
   } catch(err){
     console.error('There is an error with the profile page' , err)
@@ -33,9 +32,9 @@ router.get('/', isLoggedIn, async (req, res, next) => {
 /* GET edit profile */
 router.get("/edit-profile", isLoggedIn, async (req, res) => {
   try {
-    const sessionId = req.session.user._id
-    const profileToEdit = await User.findById(sessionId)
-    res.render("profile/edit-profile", {profileToEdit});
+    const userId = req.session.user._id
+    const user = await User.findById(userId)
+    res.render("profile/edit-profile", {user});
   } catch (err){
     console.error('There is an error with the edit profile page' , err)
   }
@@ -45,9 +44,9 @@ router.get("/edit-profile", isLoggedIn, async (req, res) => {
 router.post("/profile-edited", isLoggedIn, async (req, res) => {
   try {
     const sessionId = req.session.user._id
-  const {name, surname, username, country, email} = req.body
-  const updatedUser = await User.findByIdAndUpdate(sessionId, {name, surname, username, country, email}, { new: true });
-  res.redirect("/");}
+    const {name, surname, username, country, email} = req.body
+    const updatedUser = await User.findByIdAndUpdate(sessionId, {name, surname, username, country, email}, { new: true });
+  res.redirect("/profile");}
   catch (err){
     console.error('There is an error with the edited profile page' , err)
   }

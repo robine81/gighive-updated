@@ -20,6 +20,7 @@ const uploader = require('../middleware/cloudinary.config');
 /* GET add festival*/ 
 router.get('/add-festival', isLoggedIn, async (req, res, next) => {
   try{
+    console.log('req.session.user: ', req.session.user)
     const allFestivals = await Festival.find()
     res.render('festival/add-festival', {allFestivals});
   } 
@@ -45,6 +46,8 @@ router.post('/add-festival', isLoggedIn, uploader.single('imageUrl'), async (req
     // Search the database for a festival with the name submitted in the form
     const foundFestival = await Festival.findOne({ name })
     const createdBy = req.session.user._id
+
+    console.log(foundFestival)
     
     // If the festival is found, send the message festival is taken
     if (foundFestival) {

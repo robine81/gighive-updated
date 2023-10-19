@@ -6,8 +6,14 @@ const Festival = require('../models/Festival.model')
 
 /* GET Search page */
 router.get('/', async (req, res, next) => {
+  try {
+    console.log(req.query)
     const allFestivals = await Festival.find()
     res.render('search-result', {allFestivals});
+  }
+  catch(err){
+    console.error('There was an error in searching festival: ', err)
+  }
   })
 
   module.exports = router

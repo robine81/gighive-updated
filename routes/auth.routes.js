@@ -82,7 +82,7 @@ router.post('/signup', isLoggedOut, (req, res) => {
         res.redirect('/')
       })
       .catch(error => {
-        //  console.error(error)
+          // console.error('Here is the errorrrrr: '+ error)
         if (error instanceof mongoose.Error.ValidationError) {
           return res.status(400).render('auth/signup', { errorMessage: error.message })
         }
@@ -142,7 +142,7 @@ router.post('/login', isLoggedOut, (req, res, next) => {
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
 
         /********************* SHOULD WE redirect to /profile here???? ***************/
-        return res.redirect('/')
+        return res.redirect('/profile')
       })
     })
 
